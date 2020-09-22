@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentsLimitInsurance.App", "ContentsLimitInsurance.App.csproj", "{4D39CA77-DDEA-4D68-AF75-A1F05B3990A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentsLimitInsurance.App.Test", "..\ContentsLimitInsurance.App.Test\ContentsLimitInsurance.App.Test.csproj", "{6AF6A66E-9079-4863-8592-F978666F98E3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4D39CA77-DDEA-4D68-AF75-A1F05B3990A1} = {4D39CA77-DDEA-4D68-AF75-A1F05B3990A1}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D39CA77-DDEA-4D68-AF75-A1F05B3990A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D39CA77-DDEA-4D68-AF75-A1F05B3990A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D39CA77-DDEA-4D68-AF75-A1F05B3990A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D39CA77-DDEA-4D68-AF75-A1F05B3990A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AF6A66E-9079-4863-8592-F978666F98E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF6A66E-9079-4863-8592-F978666F98E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF6A66E-9079-4863-8592-F978666F98E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF6A66E-9079-4863-8592-F978666F98E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1D6676B8-B784-42D9-BEC9-CCC74437A917}
+	EndGlobalSection
+EndGlobal
