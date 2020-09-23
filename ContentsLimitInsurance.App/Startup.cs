@@ -1,13 +1,16 @@
 using AutoMapper;
+using ContentsLimitInsurance.App.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 
 namespace ContentsLimitInsurance.App
 {
@@ -23,6 +26,18 @@ namespace ContentsLimitInsurance.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region DBContext
+
+            var appSettings = "appsettings.json";
+#if DEBUG
+            appSettings = "appsettings.Development.json";
+#endif
+            IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(appSettings).Build();
+
+            services.AddDbContext<dbContext>(options =>
+                options.UseNpgsql(configuration.GetConnectionString("postgres")));
+            #endregion
+
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory

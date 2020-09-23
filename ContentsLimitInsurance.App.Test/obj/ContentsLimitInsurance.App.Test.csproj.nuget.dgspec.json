@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App.Test\\ContentsLimitInsurance.App.Test.csproj": {}
+    "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App.Test\\ContentsLimitInsurance.App.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App.Test\\ContentsLimitInsurance.App.Test.csproj": {
+    "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App.Test\\ContentsLimitInsurance.App.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App.Test\\ContentsLimitInsurance.App.Test.csproj",
+        "projectUniqueName": "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App.Test\\ContentsLimitInsurance.App.Test.csproj",
         "projectName": "ContentsLimitInsurance.App.Test",
-        "projectPath": "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App.Test\\ContentsLimitInsurance.App.Test.csproj",
+        "projectPath": "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App.Test\\ContentsLimitInsurance.App.Test.csproj",
         "packagesPath": "C:\\Users\\laislla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App.Test\\obj\\",
+        "outputPath": "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App.Test\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App\\ContentsLimitInsurance.App.csproj": {
-                "projectPath": "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App\\ContentsLimitInsurance.App.csproj"
+              "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App\\ContentsLimitInsurance.App.csproj": {
+                "projectPath": "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App\\ContentsLimitInsurance.App.csproj"
               }
             }
           }
@@ -84,14 +84,14 @@
         }
       }
     },
-    "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App\\ContentsLimitInsurance.App.csproj": {
+    "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App\\ContentsLimitInsurance.App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App\\ContentsLimitInsurance.App.csproj",
+        "projectUniqueName": "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App\\ContentsLimitInsurance.App.csproj",
         "projectName": "ContentsLimitInsurance.App",
-        "projectPath": "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App\\ContentsLimitInsurance.App.csproj",
+        "projectPath": "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App\\ContentsLimitInsurance.App.csproj",
         "packagesPath": "C:\\Users\\laislla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\laislla\\source\\repos\\ContentsLimitInsurance.App\\obj\\",
+        "outputPath": "C:\\Users\\laislla\\source\\repos\\nudesolutions\\contents-limit-insurance\\ContentsLimitInsurance.App\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -128,6 +128,20 @@
             "Microsoft.AspNetCore.SpaServices.Extensions": {
               "target": "Package",
               "version": "[3.1.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
+              "target": "Package",
+              "version": "[1.1.0, )"
             }
           },
           "imports": [
