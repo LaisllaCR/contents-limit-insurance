@@ -1,15 +1,16 @@
 using AutoMapper;
+using ContentsLimitInsurance.App.Dtos;
+using ContentsLimitInsurance.App.Mappings;
 using ContentsLimitInsurance.App.Models;
+using ContentsLimitInsurance.App.Repositories;
+using ContentsLimitInsurance.App.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.IO;
 
 namespace ContentsLimitInsurance.App
@@ -37,16 +38,24 @@ namespace ContentsLimitInsurance.App
             services.AddDbContext<dbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("postgres")));
             #endregion
+            services.AddScoped<IHighValueItemsService, HighValueItemsService>();
 
             services.AddControllersWithViews();
+
+            var config = new AutoMapper.MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<HighValueItemProfile>();
+                cfg.CreateMap<HighValueItemDto, HighValueItem>();
+                cfg.CreateMap<HighValueItem, HighValueItemDto>();
+            });
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
-
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

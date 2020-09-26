@@ -41,11 +41,12 @@ namespace ContentsLimitInsurance.App.Models
                 entity.Property(e => e.HighValueItemId).HasColumnName("high_value_item_id");
 
                 entity.Property(e => e.HighValueItemKey)
-                    .IsRequired()
                     .HasColumnName("high_value_item_key")
                     .HasMaxLength(255);
 
                 entity.Property(e => e.ItemCategoryId).HasColumnName("item_category_id");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
 
                 entity.Property(e => e.Name)
                     .IsRequired()

@@ -2,7 +2,7 @@
 using ContentsLimitInsurance.App.Dtos;
 using ContentsLimitInsurance.App.Entities;
 
-namespace ContentsLimitInsurance.App.Profiles
+namespace ContentsLimitInsurance.App.Mappings
 {
     public class HighValueItemProfile : Profile
     {
