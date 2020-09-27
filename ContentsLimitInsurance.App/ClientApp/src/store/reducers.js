@@ -48,25 +48,63 @@ export const items = (state = [], action) => {
 
 export const categories = (state = [], action) => {
   const { type, payload } = action;
+  function compareValues(key, order = "asc") {
+    return function innerSort(a, b) {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        // property doesn't exist on either object
+        return 0;
+      }
 
+      const varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+      const varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return order === "desc" ? comparison * -1 : comparison;
+    };
+  }
   switch (type) {
     case ActionTypes.CREATE_HIGH_VALUE_ITEM: {
       const item = payload;
-      const newState = state.map((result) => {
-        result.items =
-          result.itemCategoryId == item.itemCategoryId
-            ? result.items.concat(item)
-            : result.items;
-        return result;
+      var hasCategory = false;
+      state.map((category) => {
+        if (category.itemCategoryId == item.itemCategoryId) {
+          hasCategory = true;
+        }
       });
-      return newState;
+
+      console.log(hasCategory);
+      if (hasCategory) {
+        return state
+          .map((result) => {
+            result.items =
+              result.itemCategoryId == item.itemCategoryId
+                ? result.items.concat(item).sort(compareValues("name"))
+                : result.items.sort(compareValues("name"));
+            return result;
+          })
+          .sort(compareValues("name"));
+      } else {
+        var newCategory = {
+          name: item.categoryName,
+          itemCategoryId: item.itemCategoryId,
+          items: [item],
+        };
+        return state.concat(newCategory).sort(compareValues("name"));
+      }
     }
     case ActionTypes.REMOVE_HIGH_VALUE_ITEM: {
       const { item: itemToRemove } = payload;
       const newState = state.map((result) => {
-        result.items = result.items.filter(
-          (item) => item.highValueItemId !== itemToRemove.highValueItemId
-        );
+        result.items = result.items
+          .filter(
+            (item) => item.highValueItemId !== itemToRemove.highValueItemId
+          )
+          .sort(compareValues("name"));
         return result;
       });
       return newState;

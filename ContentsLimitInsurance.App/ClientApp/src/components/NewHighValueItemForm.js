@@ -77,7 +77,7 @@ class NewHighValueItemForm extends React.Component {
               this.setState({
                 name: "",
                 value: 0,
-                itemCategoryId: 0,
+                itemCategoryId: 1,
               });
             }
           }}

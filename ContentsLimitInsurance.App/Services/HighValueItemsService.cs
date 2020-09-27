@@ -30,8 +30,9 @@ namespace ContentsLimitInsurance.App.Repositories
 
                 _context.HighValueItem.Add(newHighValueItem);
                 _context.SaveChanges();
-
-                return _mapper.Map<HighValueItem, HighValueItemDto>(newHighValueItem);
+                HighValueItemDto createdHighValueItem = _mapper.Map<HighValueItem, HighValueItemDto>(newHighValueItem);
+                createdHighValueItem.CategoryName = _context.ItemCategory.Find(newHighValueItem.ItemCategoryId).Name;
+                return createdHighValueItem;
             }
             catch (Exception ex)
             {
@@ -119,7 +120,7 @@ namespace ContentsLimitInsurance.App.Repositories
             {
                 List<HighValueItem> allHighValueItemUser = _context.HighValueItem
                                                                         .Where(item => item.UserId == userId)
-                                                                        .OrderBy(x => x.ItemCategoryId)
+                                                                        .OrderBy(x => x.Name)
                                                                         .ToList();
 
                 List<HighValueItemDto> allHighValueItemUserDtos = _mapper.Map<List<HighValueItem>, List<HighValueItemDto>>(allHighValueItemUser);
@@ -139,7 +140,7 @@ namespace ContentsLimitInsurance.App.Repositories
                     itemsByCategory.Add(userCategory); 
                 }
 
-                return itemsByCategory;
+                return itemsByCategory.OrderBy(x => x.Name);
             }
             catch (Exception ex)
             {
