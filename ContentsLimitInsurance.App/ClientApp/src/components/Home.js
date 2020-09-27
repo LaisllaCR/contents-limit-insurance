@@ -29,6 +29,7 @@ const Home = ({
           categoryName={category.name}
         />
       ))}
+      <br></br>
       <h3>
         Total: $
         {Math.round(
