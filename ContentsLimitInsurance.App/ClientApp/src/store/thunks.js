@@ -4,6 +4,7 @@ import {
   loadHighValueItemFailure,
   createHighValueItem,
   removeHighValueItem,
+  loadHighValueItemsPerCategorySuccess,
 } from "./actions";
 
 export const loadHighValueItems = () => async (dispatch, getState) => {
@@ -13,6 +14,22 @@ export const loadHighValueItems = () => async (dispatch, getState) => {
     const items = await response.json();
 
     dispatch(loadHighValueItemSuccess(items));
+  } catch (e) {
+    dispatch(loadHighValueItemFailure());
+    dispatch(displayAlert(e));
+  }
+};
+
+export const loadHighValueItemsPerCategory = () => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch(loadHighValueItemInProgress());
+    const response = await fetch("api/high-value-items/categories/user/1");
+    const categories = await response.json();
+
+    dispatch(loadHighValueItemsPerCategorySuccess(categories));
   } catch (e) {
     dispatch(loadHighValueItemFailure());
     dispatch(displayAlert(e));

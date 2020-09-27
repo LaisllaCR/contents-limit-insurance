@@ -7,6 +7,7 @@ namespace ContentsLimitInsurance.App.Services
     {
         IEnumerable<HighValueItemDto> GetAllHighValueItemsByUser(int userId);
         HighValueItemDto GetHighValueItemDto(int id);
+        IEnumerable<CategoryPerUserDto> GetHighValueItemsPerCategories(int id);
         HighValueItemDto AddHighValueItem(HighValueItemDto dto);
         HighValueItemDto DeleteHighValueItem(int id);
         bool HighValueItemExists(int id);

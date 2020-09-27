@@ -19,6 +19,11 @@ export const loadHighValueItemSuccess = (items) => ({
   payload: { items },
 });
 
+export const loadHighValueItemsPerCategorySuccess = (categories) => ({
+  type: ActionTypes.LOAD_HIGH_VALUE_ITEMS_PER_CATEGORY_SUCCESS,
+  payload: { categories },
+});
+
 export const loadHighValueItemFailure = () => ({
   type: ActionTypes.LOAD_HIGH_VALUE_ITEMS_FAILURE,
 });

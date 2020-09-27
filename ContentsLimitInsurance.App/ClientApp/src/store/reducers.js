@@ -5,7 +5,7 @@ export const isLoading = (state = false, action) => {
   switch (type) {
     case ActionTypes.LOAD_HIGH_VALUE_ITEMS_IN_PROGRESS:
       return true;
-    case ActionTypes.LOAD_HIGH_VALUE_ITEMS_SUCCESS:
+    case ActionTypes.LOAD_HIGH_VALUE_ITEMS_PER_CATEGORY_SUCCESS:
       return false;
     case ActionTypes.LOAD_HIGH_VALUE_ITEMS_FAILURE:
       return false;
@@ -31,6 +31,25 @@ export const items = (state = [], action) => {
     case ActionTypes.LOAD_HIGH_VALUE_ITEMS_SUCCESS: {
       const items = payload.items;
       return items;
+    }
+    case ActionTypes.LOAD_HIGH_VALUE_ITEMS_PER_CATEGORY_SUCCESS: {
+      const categories = payload.categories;
+      return categories;
+    }
+    case ActionTypes.LOAD_HIGH_VALUE_ITEMS_IN_PROGRESS:
+    case ActionTypes.LOAD_HIGH_VALUE_ITEMS_FAILURE:
+    default:
+      return state;
+  }
+};
+
+export const categories = (state = [], action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case ActionTypes.LOAD_HIGH_VALUE_ITEMS_PER_CATEGORY_SUCCESS: {
+      const categories = payload.categories;
+      return categories;
     }
     case ActionTypes.LOAD_HIGH_VALUE_ITEMS_IN_PROGRESS:
     case ActionTypes.LOAD_HIGH_VALUE_ITEMS_FAILURE:

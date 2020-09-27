@@ -1,12 +1,12 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
-import { items, isLoading } from "./reducers";
+import { items, isLoading, categories } from "./reducers";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-const reducers = { items, isLoading };
+const reducers = { items, categories, isLoading };
 
 const persistConfig = {
   key: "root",

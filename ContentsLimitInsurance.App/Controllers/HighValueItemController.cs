@@ -31,6 +31,19 @@ namespace ContentsLimitInsurance.App.Controllers
             }
         }
 
+        [HttpGet("categories/user/{id}", Name = "GetHighValueItemsPerCategories")]
+        public ActionResult<IEnumerable<CategoryPerUserDto>> GetHighValueItemsPerCategories([FromRoute] int id)
+        {
+            try
+            {
+                return Ok(_highValueItemService.GetHighValueItemsPerCategories(id));
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpGet("{id}", Name = "GetHighValueItem")]
         public IActionResult GetHighValueItem([FromRoute] int id)
         {

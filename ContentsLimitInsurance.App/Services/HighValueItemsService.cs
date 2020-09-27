@@ -112,5 +112,39 @@ namespace ContentsLimitInsurance.App.Repositories
                 throw;
             }
         }
+
+        public IEnumerable<CategoryPerUserDto> GetHighValueItemsPerCategories(int userId)
+        {
+            try
+            {
+                List<HighValueItem> allHighValueItemUser = _context.HighValueItem
+                                                                        .Where(item => item.UserId == userId)
+                                                                        .OrderBy(x => x.ItemCategoryId)
+                                                                        .ToList();
+
+                List<HighValueItemDto> allHighValueItemUserDtos = _mapper.Map<List<HighValueItem>, List<HighValueItemDto>>(allHighValueItemUser);
+
+                var categories = allHighValueItemUserDtos.GroupBy(x => x.ItemCategoryId).ToList();
+
+                List<CategoryPerUserDto> itemsByCategory = new List<CategoryPerUserDto>();
+                foreach (var item in categories)
+                {
+                    var category = _context.ItemCategory.Find(item.Key);
+
+                    CategoryPerUserDto userCategory = new CategoryPerUserDto();
+                    userCategory.Name = category.Name;
+                    userCategory.ItemCategoryId = category.ItemCategoryId;
+                    userCategory.Items = allHighValueItemUserDtos.Where(x => x.ItemCategoryId == item.Key).ToList();
+
+                    itemsByCategory.Add(userCategory); 
+                }
+
+                return itemsByCategory;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
