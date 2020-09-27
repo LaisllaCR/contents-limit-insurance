@@ -80,9 +80,8 @@ namespace ContentsLimitInsurance.App.Controllers
             }
 
             try
-            {
-                _highValueItemService.DeleteHighValueItem(id);
-                return Ok();
+            {                
+                return Ok(_highValueItemService.DeleteHighValueItem(id));
             }
             catch
             {

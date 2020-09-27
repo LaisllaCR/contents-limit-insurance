@@ -8,7 +8,7 @@ namespace ContentsLimitInsurance.App.Services
         IEnumerable<HighValueItemDto> GetAllHighValueItemsByUser(int userId);
         HighValueItemDto GetHighValueItemDto(int id);
         HighValueItemDto AddHighValueItem(HighValueItemDto dto);
-        void DeleteHighValueItem(int id);
+        HighValueItemDto DeleteHighValueItem(int id);
         bool HighValueItemExists(int id);
     }
 }

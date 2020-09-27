@@ -39,13 +39,14 @@ namespace ContentsLimitInsurance.App.Repositories
             }
         }
 
-        public void DeleteHighValueItem(int id)
+        public HighValueItemDto DeleteHighValueItem(int id)
         {
             try
             {
                 HighValueItem highValueItemToRemove = GetHighValueItem(id);
                 _context.HighValueItem.Remove(highValueItemToRemove);
                 _context.SaveChanges();
+                return _mapper.Map<HighValueItem, HighValueItemDto>(highValueItemToRemove);
             }
             catch (Exception)
             { 
