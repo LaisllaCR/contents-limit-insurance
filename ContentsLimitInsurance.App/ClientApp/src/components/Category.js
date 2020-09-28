@@ -4,11 +4,11 @@ import "./Category.css";
 import HighValueItem from "./HighValueItem";
 import { removeHighValueItemRequest } from "../store/thunks";
 
-const Category = ({ categoryName, items, onRemovePressed }) => {
+const Category = ({ category, items, onRemovePressed }) => {
   const content = (
     <div className="list-wrapper">
       <h3>
-        {categoryName} $
+        {category.name} $
         {items.reduce(function (prev, current) {
           return prev + +current.value;
         }, 0)}

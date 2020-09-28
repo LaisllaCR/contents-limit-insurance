@@ -18,19 +18,6 @@ export const items = (state = [], action) => {
   const { type, payload } = action;
 
   switch (type) {
-    // case ActionTypes.CREATE_HIGH_VALUE_ITEM: {
-    //   const item = payload;
-    //   window.location.reload(false);
-    //   return state.concat(item);
-    // }
-    // case ActionTypes.REMOVE_HIGH_VALUE_ITEM: {
-    //   alert("oi1");
-    //   const { item: itemToRemove } = payload;
-    //   //window.location.reload(false);
-    //   return state.filter(
-    //     (item) => item.items.highValueItemId !== itemToRemove.highValueItemId
-    //   );
-    // }
     case ActionTypes.LOAD_HIGH_VALUE_ITEMS_SUCCESS: {
       const items = payload.items;
       return items;
@@ -48,15 +35,28 @@ export const items = (state = [], action) => {
 
 export const categories = (state = [], action) => {
   const { type, payload } = action;
-  function compareValues(key, order = "asc") {
+  function compareValues(key, order = "asc", nested = false) {
     return function innerSort(a, b) {
       if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
         // property doesn't exist on either object
         return 0;
       }
+      var varA = "";
+      var varB = "";
 
-      const varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
-      const varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+      if (nested) {
+        varA =
+          typeof a[key].name === "string"
+            ? a[key].name.toUpperCase()
+            : a[key].name;
+        varB =
+          typeof b[key].name === "string"
+            ? b[key].name.toUpperCase()
+            : b[key].name;
+      } else {
+        varA = typeof a[key] === "string" ? a[key].toUpperCase() : a[key];
+        varB = typeof b[key] === "string" ? b[key].toUpperCase() : b[key];
+      }
 
       let comparison = 0;
       if (varA > varB) {
@@ -67,34 +67,38 @@ export const categories = (state = [], action) => {
       return order === "desc" ? comparison * -1 : comparison;
     };
   }
+
   switch (type) {
     case ActionTypes.CREATE_HIGH_VALUE_ITEM: {
       const item = payload;
       var hasCategory = false;
       state.map((category) => {
-        if (category.itemCategoryId == item.itemCategoryId) {
+        if (category.category.itemCategoryId == item.itemCategoryId) {
           hasCategory = true;
         }
       });
 
-      console.log(hasCategory);
       if (hasCategory) {
         return state
           .map((result) => {
             result.items =
-              result.itemCategoryId == item.itemCategoryId
+              result.category.itemCategoryId == item.itemCategoryId
                 ? result.items.concat(item).sort(compareValues("name"))
                 : result.items.sort(compareValues("name"));
             return result;
           })
-          .sort(compareValues("name"));
+          .sort(compareValues("category", "asc", true));
       } else {
         var newCategory = {
-          name: item.categoryName,
-          itemCategoryId: item.itemCategoryId,
+          category: {
+            name: item.category.name,
+            itemCategoryId: item.itemCategoryId,
+          },
           items: [item],
         };
-        return state.concat(newCategory).sort(compareValues("name"));
+        return state
+          .concat(newCategory)
+          .sort(compareValues("category", "asc", true));
       }
     }
     case ActionTypes.REMOVE_HIGH_VALUE_ITEM: {

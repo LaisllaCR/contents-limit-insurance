@@ -32,7 +32,7 @@ namespace ContentsLimitInsurance.App.Controllers
         }
 
         [HttpGet("categories/user/{id}", Name = "GetHighValueItemsPerCategories")]
-        public ActionResult<IEnumerable<CategoryPerUserDto>> GetHighValueItemsPerCategories([FromRoute] int id)
+        public ActionResult<IEnumerable<CategoryWithItemsDto>> GetHighValueItemsPerCategories([FromRoute] int id)
         {
             try
             {

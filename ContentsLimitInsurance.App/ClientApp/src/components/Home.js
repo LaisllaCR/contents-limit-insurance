@@ -22,11 +22,11 @@ const Home = ({
   const content = (
     <div className="list-wrapper">
       <NewHighValueItemForm />
-      {categories.map((category) => (
+      {categories.map((categoryItem) => (
         <Category
-          key={category.itemCategoryId}
-          items={category.items}
-          categoryName={category.name}
+          key={categoryItem.itemCategoryId}
+          items={categoryItem.items}
+          category={categoryItem.category}
         />
       ))}
       <br></br>

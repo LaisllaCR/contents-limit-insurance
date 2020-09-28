@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ContentsLimitInsurance.App.Dtos;
-using ContentsLimitInsurance.App.Entities;
+using ContentsLimitInsurance.App.Models;
 
 namespace ContentsLimitInsurance.App.Mappings
 {

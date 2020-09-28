@@ -42,11 +42,14 @@ namespace ContentsLimitInsurance.App
 
             services.AddControllersWithViews();
 
-            var config = new AutoMapper.MapperConfiguration(cfg =>
+            var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<HighValueItemProfile>();
                 cfg.CreateMap<HighValueItemDto, HighValueItem>();
                 cfg.CreateMap<HighValueItem, HighValueItemDto>();
+                cfg.AddProfile<ItemCategoryProfile>();
+                cfg.CreateMap<ItemCategoryDto, ItemCategory>();
+                cfg.CreateMap<ItemCategory, ItemCategoryDto>();
             });
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);

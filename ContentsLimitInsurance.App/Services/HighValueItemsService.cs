@@ -30,11 +30,10 @@ namespace ContentsLimitInsurance.App.Repositories
 
                 _context.HighValueItem.Add(newHighValueItem);
                 _context.SaveChanges();
-                HighValueItemDto createdHighValueItem = _mapper.Map<HighValueItem, HighValueItemDto>(newHighValueItem);
-                createdHighValueItem.CategoryName = _context.ItemCategory.Find(newHighValueItem.ItemCategoryId).Name;
-                return createdHighValueItem;
+
+                return GetHighValueItemDto(newHighValueItem);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -47,10 +46,26 @@ namespace ContentsLimitInsurance.App.Repositories
                 HighValueItem highValueItemToRemove = GetHighValueItem(id);
                 _context.HighValueItem.Remove(highValueItemToRemove);
                 _context.SaveChanges();
-                return _mapper.Map<HighValueItem, HighValueItemDto>(highValueItemToRemove);
+                
+                return GetHighValueItemDto(highValueItemToRemove);
+
             }
             catch (Exception)
             { 
+                throw;
+            }
+        }
+
+        private HighValueItemDto GetHighValueItemDto(HighValueItem highValueItem)
+        {
+            try
+            {
+                HighValueItemDto highValueItemDto = _mapper.Map(highValueItem, new HighValueItemDto());
+                highValueItemDto.Category = GetItemCategoryDto(highValueItemDto.ItemCategoryId);
+                return highValueItemDto;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
@@ -60,8 +75,9 @@ namespace ContentsLimitInsurance.App.Repositories
             try
             {
                 HighValueItem highValueItem = GetHighValueItem(id);
-
-                return _mapper.Map(highValueItem, new HighValueItemDto());
+                HighValueItemDto highValueItemDto = _mapper.Map(highValueItem, new HighValueItemDto());
+                highValueItemDto.Category = GetItemCategoryDto(highValueItemDto.ItemCategoryId);
+                return highValueItemDto;
             }
             catch (Exception)
             {
@@ -95,7 +111,7 @@ namespace ContentsLimitInsurance.App.Repositories
 
                 return allHighValueItemUserDtos;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -108,13 +124,13 @@ namespace ContentsLimitInsurance.App.Repositories
 
                 return (highValueItem == null) ? false : true;
             }
-            catch
+            catch (Exception)
             {
                 throw;
             }
         }
 
-        public IEnumerable<CategoryPerUserDto> GetHighValueItemsPerCategories(int userId)
+        public IEnumerable<CategoryWithItemsDto> GetHighValueItemsPerCategories(int userId)
         {
             try
             {
@@ -127,22 +143,49 @@ namespace ContentsLimitInsurance.App.Repositories
 
                 var categories = allHighValueItemUserDtos.GroupBy(x => x.ItemCategoryId).ToList();
 
-                List<CategoryPerUserDto> itemsByCategory = new List<CategoryPerUserDto>();
+                List<CategoryWithItemsDto> itemsByCategory = new List<CategoryWithItemsDto>();
                 foreach (var item in categories)
                 {
-                    var category = _context.ItemCategory.Find(item.Key);
-
-                    CategoryPerUserDto userCategory = new CategoryPerUserDto();
-                    userCategory.Name = category.Name;
-                    userCategory.ItemCategoryId = category.ItemCategoryId;
-                    userCategory.Items = allHighValueItemUserDtos.Where(x => x.ItemCategoryId == item.Key).ToList();
+                    CategoryWithItemsDto userCategory = new CategoryWithItemsDto()
+                    {
+                        Category = GetItemCategoryDto(item.Key),
+                        Items = allHighValueItemUserDtos.Where(x => x.ItemCategoryId == item.Key).ToList()
+                    };
 
                     itemsByCategory.Add(userCategory); 
                 }
 
-                return itemsByCategory.OrderBy(x => x.Name);
+                return itemsByCategory.OrderBy(x => x.Category.Name);
             }
-            catch (Exception ex)
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private ItemCategoryDto GetItemCategoryDto(int id)
+        {
+            try
+            {
+                ItemCategory itemCategory = GetItemCategory(id);
+
+                return _mapper.Map(itemCategory, new ItemCategoryDto());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private ItemCategory GetItemCategory(int id)
+        {
+            try
+            {
+                ItemCategory itemCategory = _context.ItemCategory.Find(id);
+
+                return itemCategory;
+            }
+            catch (Exception)
             {
                 throw;
             }

@@ -7,6 +7,7 @@
         public double Value { get; set; }
         public int ItemCategoryId { get; set; }
         public string CategoryName { get; set; }
+        public ItemCategoryDto Category { get; set; }
         public int UserId { get; set; }
 
         public HighValueItemDto()
