@@ -1,40 +1,64 @@
-import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import React, { useEffect } from "react";
 import NewHighValueItemForm from "./NewHighValueItemForm";
-import HighValueItem from "./HighValueItem";
-import "./HighValueItemsList.css";
+import Category from "./Category";
 import {
-  loadHighValueItems,
+  loadHighValueItemsPerCategory,
   removeHighValueItemRequest,
 } from "../store/thunks";
+import { Card, Row, Col } from "react-bootstrap";
+import "./HighValueItemsList.css";
 
 const HighValueItemsList = ({
-  items = [],
+  categories = [],
   onRemovePressed,
   isLoading,
-  startLoadingItems,
+  startLoadingCategories,
 }) => {
   useEffect(() => {
-    startLoadingItems();
+    startLoadingCategories();
   }, []);
 
-  const loadingMessage = <div>Loading highValueItems...</div>;
+  const loadingMessage = <div>Loading...</div>;
   const content = (
-    <div className="list-wrapper">
-      <NewHighValueItemForm />
-      {items.map((highValueItem) => (
-        <HighValueItem
-          key={highValueItem.highValueItemId}
-          item={highValueItem}
-          onRemovePressed={onRemovePressed}
-        />
-      ))}
-      <h3>
-        Total: $
-        {items.reduce(function (prev, current) {
-          return prev + +current.value;
-        }, 0)}
-      </h3>
+    <div>
+      <Card className="category-items">
+        <Card.Body>
+          <NewHighValueItemForm />
+          {categories.map((categoryItem) => (
+            <Category
+              key={categoryItem.itemCategoryId}
+              items={categoryItem.items}
+              category={categoryItem.category}
+            />
+          ))}
+
+          <Card>
+            <Card.Body>
+              <Card.Title>
+                <Row>
+                  <Col lg={8} md={8} sm={6}>
+                    TOTAL
+                  </Col>
+                  <Col lg={4} md={4} sm={6}>
+                    $
+                    {Math.round(
+                      categories.reduce(function (a, b) {
+                        return (
+                          a +
+                          b.items.reduce(function (c, d) {
+                            return c + d.value;
+                          }, 0)
+                        );
+                      }, 0) * 100
+                    ) / 100}
+                  </Col>
+                </Row>
+              </Card.Title>
+            </Card.Body>
+          </Card>
+        </Card.Body>
+      </Card>
     </div>
   );
   return isLoading ? loadingMessage : content;
@@ -42,11 +66,11 @@ const HighValueItemsList = ({
 
 const mapStateToProps = (state) => ({
   isLoading: state.isLoading,
-  items: state.items,
+  categories: state.categories,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  startLoadingItems: () => dispatch(loadHighValueItems()),
+  startLoadingCategories: () => dispatch(loadHighValueItemsPerCategory()),
   onRemovePressed: (highValueItemId) =>
     dispatch(removeHighValueItemRequest(highValueItemId)),
 });

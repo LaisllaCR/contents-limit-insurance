@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { addHighValueItemRequest } from "./../store/thunks";
-import "./NewHighValueItemForm.css";
+import { Card, Form, Row, Col, Button } from "react-bootstrap";
 
 class NewHighValueItemForm extends React.Component {
   constructor(props) {
@@ -26,66 +26,73 @@ class NewHighValueItemForm extends React.Component {
   }
 
   render() {
-    //const NewHighValueItemForm = ({ items, onCreatePressed }) => {
-    //const [inputValue, setInputValue] = useState("");
-
     return (
-      <div className="new-todo-form">
-        <input
-          name="name"
-          className="new-todo-input"
-          type="text"
-          maxLength="50"
-          placeholder="Name"
-          value={this.state.name}
-          onChange={this.handleInputChange}
-        />
-        <input
-          name="value"
-          className="new-todo-input"
-          type="number"
-          placeholder="Value"
-          maxLength="6"
-          title="Value"
-          value={this.state.value}
-          onChange={this.handleInputChange}
-        />
-
-        <select
-          name="itemCategoryId"
-          title="Category"
-          value={this.state.itemCategoryId}
-          onChange={this.handleInputChange}
-          className="new-todo-input"
-        >
-          <option value="1">Eletronics</option>
-          <option value="2">Clothing</option>
-          <option value="3">Kitchen</option>
-        </select>
-        <br></br>
-        <button
-          onClick={() => {
-            const isDuplicateText = this.props.items.some(
-              (item) => item.name === this.state.name
-            );
-            if (!isDuplicateText) {
-              this.props.onCreatePressed(
-                this.state.name,
-                this.state.value,
-                this.state.itemCategoryId
-              );
-              this.setState({
-                name: "",
-                value: 0,
-                itemCategoryId: 1,
-              });
-            }
-          }}
-          className="new-todo-button"
-        >
-          Create Item
-        </button>
-      </div>
+      <Card>
+        <Card.Body>
+          <Form>
+            <Form.Group as={Row} controlId="formPlaintextEmail">
+              <Col sm="5">
+                <Form.Control
+                  name="name"
+                  type="text"
+                  maxLength="50"
+                  placeholder="Item Name"
+                  value={this.state.name}
+                  onChange={this.handleInputChange}
+                />
+              </Col>
+              <Col sm="2">
+                <Form.Control
+                  name="value"
+                  type="number"
+                  placeholder="Value"
+                  maxLength="6"
+                  title="Value"
+                  value={this.state.value}
+                  onChange={this.handleInputChange}
+                />
+              </Col>
+              <Col sm="4">
+                <Form.Control
+                  as="select"
+                  name="itemCategoryId"
+                  title="Category"
+                  value={this.state.itemCategoryId}
+                  onChange={this.handleInputChange}
+                  defaultValue="Eletronics"
+                >
+                  <option value="1">Eletronics</option>
+                  <option value="2">Clothing</option>
+                  <option value="3">Kitchen</option>
+                </Form.Control>
+              </Col>
+              <Col sm="1">
+                <Button
+                  onClick={() => {
+                    const isDuplicateText = this.props.items.some(
+                      (item) => item.name === this.state.name
+                    );
+                    if (!isDuplicateText) {
+                      this.props.onCreatePressed(
+                        this.state.name,
+                        this.state.value,
+                        this.state.itemCategoryId
+                      );
+                      this.setState({
+                        name: "",
+                        value: 0,
+                        itemCategoryId: 1,
+                      });
+                    }
+                  }}
+                >
+                  Add
+                </Button>
+              </Col>
+            </Form.Group>
+          </Form>
+        </Card.Body>
+      </Card>
     );
   }
 }
