@@ -18,12 +18,14 @@ namespace ContentsLimitInsurance.App.Controllers
             _highValueItemService = highValueItemService ?? throw new ArgumentNullException(nameof(highValueItemService));
         }
 
-        [HttpGet("user/{id}", Name = "GetAllHighValueItemsByUser")]
-        public ActionResult<IEnumerable<HighValueItemDto>> GetAllHighValueItemsByUser([FromRoute]int id)
+        [HttpGet("user/{id}", Name = "GetHighValueItemsByUser")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<IEnumerable<HighValueItemDto>>> GetHighValueItemsByUser([FromRoute]int id)
         {
             try
             {
-                return Ok(_highValueItemService.GetAllHighValueItemsByUser(id));
+                return Ok(_highValueItemService.GetHighValueItemsByUser(id));
             }
             catch (Exception)
             {
@@ -31,12 +33,14 @@ namespace ContentsLimitInsurance.App.Controllers
             }
         }
 
-        [HttpGet("categories/user/{id}", Name = "GetHighValueItemsPerCategories")]
-        public ActionResult<IEnumerable<CategoryWithItemsDto>> GetHighValueItemsPerCategories([FromRoute] int id)
+        [HttpGet("categories/user/{id}", Name = "GetHighValueItemsPerCategoriesByUser")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<IEnumerable<CategoryWithItemsDto>>> GetHighValueItemsPerCategoriesByUser([FromRoute] int id)
         {
             try
             {
-                return Ok(_highValueItemService.GetHighValueItemsPerCategories(id));
+                return Ok(_highValueItemService.GetHighValueItemsPerCategoriesByUser(id));
             }
             catch (Exception)
             {
@@ -45,7 +49,10 @@ namespace ContentsLimitInsurance.App.Controllers
         }
 
         [HttpGet("{id}", Name = "GetHighValueItem")]
-        public IActionResult GetHighValueItem([FromRoute] int id)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<HighValueItemDto>> GetHighValueItem([FromRoute] int id)
         {
             try
             {
@@ -64,8 +71,10 @@ namespace ContentsLimitInsurance.App.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostHighValueItem([FromBody] HighValueItemDto highValueItemDto)
+        [HttpPost(Name = "PostHighValueItem")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<HighValueItemDto>> PostHighValueItem([FromBody] HighValueItemDto highValueItemDto)
         {
             try
             {
@@ -76,7 +85,7 @@ namespace ContentsLimitInsurance.App.Controllers
 
                 HighValueItemDto createdHighValueItemDto = _highValueItemService.AddHighValueItem(highValueItemDto);
 
-                return CreatedAtAction("GetHighValueItem", new { id = createdHighValueItemDto.HighValueItemId }, createdHighValueItemDto);
+                return CreatedAtAction(nameof(PostHighValueItem), new { id = createdHighValueItemDto.HighValueItemId }, createdHighValueItemDto);
             }
             catch (Exception)
             {
@@ -84,8 +93,11 @@ namespace ContentsLimitInsurance.App.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHighValueItem([FromRoute] int id)
+        [HttpDelete("{id}", Name = "DeleteHighValueItem")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult<HighValueItemDto>> DeleteHighValueItem([FromRoute] int id)
         {
             if (!HighValueItemExists(id))
             {
@@ -93,12 +105,13 @@ namespace ContentsLimitInsurance.App.Controllers
             }
 
             try
-            {                
-                return Ok(_highValueItemService.DeleteHighValueItem(id));
-            }
-            catch
             {
-                return BadRequest();
+                var result = _highValueItemService.DeleteHighValueItem(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
             }
         }
 
@@ -106,7 +119,8 @@ namespace ContentsLimitInsurance.App.Controllers
         {
             try
             {
-                return _highValueItemService.HighValueItemExists(id);
+                var result = _highValueItemService.HighValueItemExists(id);
+                return result;
             }
             catch (Exception)
             {

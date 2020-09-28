@@ -258,8 +258,10 @@ C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLim
 C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\obj\Debug\netcoreapp3.1\ContentsLimitInsurance.App.Test.csprojAssemblyReference.cache
 C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\obj\Debug\netcoreapp3.1\ContentsLimitInsurance.App.Test.AssemblyInfoInputs.cache
 C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\obj\Debug\netcoreapp3.1\ContentsLimitInsurance.App.Test.AssemblyInfo.cs
-C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\obj\Debug\netcoreapp3.1\ContentsLimitInsurance.App.Test.csproj.CoreCompileInputs.cache
 C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\obj\Debug\netcoreapp3.1\ContentsLimitInsurance.App.Test.csproj.CopyComplete
 C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\obj\Debug\netcoreapp3.1\ContentsLimitInsurance.App.Test.dll
 C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\obj\Debug\netcoreapp3.1\ContentsLimitInsurance.App.Test.pdb
 C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\obj\Debug\netcoreapp3.1\ContentsLimitInsurance.App.Test.genruntimeconfig.cache
+C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\bin\Debug\netcoreapp3.1\Moq.dll
+C:\Users\laislla\source\repos\nudesolutions\contents-limit-insurance\ContentsLimitInsurance.App.Test\obj\Debug\netcoreapp3.1\ContentsLimitInsurance.App.Test.csproj.CoreCompileInputs.cache

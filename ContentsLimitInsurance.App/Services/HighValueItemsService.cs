@@ -99,7 +99,7 @@ namespace ContentsLimitInsurance.App.Repositories
             }
         }
 
-        public IEnumerable<HighValueItemDto> GetAllHighValueItemsByUser(int userId)
+        public IEnumerable<HighValueItemDto> GetHighValueItemsByUser(int userId)
         {
             try
             {
@@ -130,7 +130,7 @@ namespace ContentsLimitInsurance.App.Repositories
             }
         }
 
-        public IEnumerable<CategoryWithItemsDto> GetHighValueItemsPerCategories(int userId)
+        public IEnumerable<CategoryWithItemsDto> GetHighValueItemsPerCategoriesByUser(int userId)
         {
             try
             {
