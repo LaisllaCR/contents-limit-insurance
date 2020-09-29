@@ -33,7 +33,7 @@ namespace ContentsLimitInsurance.App.Repositories
 
                 return GetHighValueItemDto(newHighValueItem);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

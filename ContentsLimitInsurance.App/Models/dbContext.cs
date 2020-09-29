@@ -27,8 +27,9 @@ namespace ContentsLimitInsurance.App.Models
                 appSettings = "appsettings.Development.json";
 #endif
                 IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(appSettings).Build();
-                string connectionString = configuration.GetConnectionString("postgres");
-                optionsBuilder.UseNpgsql(connectionString);
+                string connectionString = configuration.GetConnectionString("sqlserver");
+
+                optionsBuilder.UseSqlServer(connectionString);
             }
         }
 

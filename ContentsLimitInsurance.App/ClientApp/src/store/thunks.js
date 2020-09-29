@@ -7,10 +7,13 @@ import {
   loadHighValueItemsPerCategorySuccess,
 } from "./actions";
 
+const apiURL =
+  "https://contentslimitinsuranceapp20200928203149.azurewebsites.net/";
+
 export const loadHighValueItems = () => async (dispatch, getState) => {
   try {
     dispatch(loadHighValueItemInProgress());
-    const response = await fetch("api/high-value-items/user/1");
+    const response = await fetch(apiURL + "api/high-value-items/user/1");
     const items = await response.json();
 
     dispatch(loadHighValueItemSuccess(items));
@@ -26,7 +29,9 @@ export const loadHighValueItemsPerCategory = () => async (
 ) => {
   try {
     dispatch(loadHighValueItemInProgress());
-    const response = await fetch("api/high-value-items/categories/user/1");
+    const response = await fetch(
+      apiURL + "api/high-value-items/categories/user/1"
+    );
     const categories = await response.json();
 
     dispatch(loadHighValueItemsPerCategorySuccess(categories));
@@ -51,7 +56,10 @@ export const addHighValueItemRequest = (name, value, itemCategoryId) => async (
       headers: { "Content-Type": "application/json" },
       body,
     };
-    const response = await fetch("api/high-value-items", requestOptions);
+    const response = await fetch(
+      apiURL + "api/high-value-items",
+      requestOptions
+    );
     const item = await response.json();
     dispatch(createHighValueItem(item));
   } catch (e) {
@@ -67,7 +75,7 @@ export const removeHighValueItemRequest = (highValueItemId) => async (
       method: "DELETE",
     };
     const response = await fetch(
-      `api/high-value-items/${highValueItemId}`,
+      `${apiURL}api/high-value-items/${highValueItemId}`,
       requestOptions
     );
     const removedItem = await response.json();

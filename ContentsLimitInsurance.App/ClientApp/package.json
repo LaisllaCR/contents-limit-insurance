@@ -9,6 +9,7 @@
     "@fortawesome/react-fontawesome": "^0.1.11",
     "bootstrap": "^4.5.2",
     "connected-react-router": "6.5.2",
+    "env-cmd": "^10.1.0",
     "history": "4.10.1",
     "jquery": "^3.4.1",
     "merge": "1.2.1",
@@ -46,14 +47,15 @@
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.16.0",
     "nan": "^2.14.1",
-    "typescript": "3.6.4"
+    "typescript": "3.8"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src/**/*.ts ./src/**/*.tsx"
+    "lint": "eslint ./src/**/*.ts ./src/**/*.tsx",
+    "build:iis": "env-cmd -f .env.iis react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"

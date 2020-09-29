@@ -36,7 +36,7 @@ namespace ContentsLimitInsurance.App
             IConfigurationRoot configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile(appSettings).Build();
 
             services.AddDbContext<dbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("postgres")));
+                options.UseSqlServer(configuration.GetConnectionString("sqlserver")));
             #endregion
             services.AddScoped<IHighValueItemsService, HighValueItemsService>();
 
@@ -76,8 +76,9 @@ namespace ContentsLimitInsurance.App
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            app.UseSpaStaticFiles(new StaticFileOptions { RequestPath = "/ClientApp/build" });
+            //app.UseStaticFiles();
+            //app.UseSpaStaticFiles();
 
             app.UseRouting();
 
