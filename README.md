@@ -9,7 +9,7 @@ to calculate the total contents limit they require and maintain a list of high-v
 https://contentslimitinsuranceapp20200928203149.azurewebsites.net/ 
 
 ## Roadmap
-Integration with Postgres Database is available. 
+Integration with Postgres Database. 
 
 ## Project status
 Developing.
