@@ -1,5 +1,5 @@
 # Contents limit insurance 
-It is a .NET Core 3.1 and React JS web application integrated with SQL Server. 
+It is a .NET Core 3.1 and React JS web application integrated with SQL Server and hosted at Azure cloud.
 
 ## Description 
 This web application was developed to be used as a simple web-application that will allow a customer 
