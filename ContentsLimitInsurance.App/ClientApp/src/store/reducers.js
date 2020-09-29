@@ -14,31 +14,12 @@ export const isLoading = (state = false, action) => {
   }
 };
 
-export const items = (state = [], action) => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case ActionTypes.LOAD_HIGH_VALUE_ITEMS_SUCCESS: {
-      const items = payload.items;
-      return items;
-    }
-    case ActionTypes.LOAD_HIGH_VALUE_ITEMS_PER_CATEGORY_SUCCESS: {
-      const categories = payload.categories;
-      return categories;
-    }
-    case ActionTypes.LOAD_HIGH_VALUE_ITEMS_IN_PROGRESS:
-    case ActionTypes.LOAD_HIGH_VALUE_ITEMS_FAILURE:
-    default:
-      return state;
-  }
-};
-
 export const categories = (state = [], action) => {
   const { type, payload } = action;
+
   function compareValues(key, order = "asc", nested = false) {
     return function innerSort(a, b) {
       if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-        // property doesn't exist on either object
         return 0;
       }
       var varA = "";

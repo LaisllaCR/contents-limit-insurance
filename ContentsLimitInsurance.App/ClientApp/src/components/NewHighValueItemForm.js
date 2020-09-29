@@ -69,9 +69,7 @@ class NewHighValueItemForm extends React.Component {
               <Col sm="1">
                 <Button
                   onClick={() => {
-                    const isDuplicateText = this.props.items.some(
-                      (item) => item.name === this.state.name
-                    );
+                    const isDuplicateText = false;
                     if (!isDuplicateText) {
                       this.props.onCreatePressed(
                         this.state.name,

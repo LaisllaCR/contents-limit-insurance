@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import "./Category.css";
-import HighValueItem from "./HighValueItem";
 import { removeHighValueItemRequest } from "../store/thunks";
 import { Card, Table, Row, Col } from "react-bootstrap";
+import HighValueItem from "./HighValueItem";
+import "./Category.css";
 
 const Category = ({ category, items, onRemovePressed }) => {
   const content = (

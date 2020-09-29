@@ -1,5 +1,4 @@
 using AutoMapper;
-using ContentsLimitInsurance.App.Dtos;
 using ContentsLimitInsurance.App.Mappings;
 using ContentsLimitInsurance.App.Models;
 using ContentsLimitInsurance.App.Repositories;
@@ -45,11 +44,7 @@ namespace ContentsLimitInsurance.App
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<HighValueItemProfile>();
-                cfg.CreateMap<HighValueItemDto, HighValueItem>();
-                cfg.CreateMap<HighValueItem, HighValueItemDto>();
                 cfg.AddProfile<ItemCategoryProfile>();
-                cfg.CreateMap<ItemCategoryDto, ItemCategory>();
-                cfg.CreateMap<ItemCategory, ItemCategoryDto>();
             });
             IMapper mapper = config.CreateMapper();
             services.AddSingleton(mapper);
@@ -77,8 +72,6 @@ namespace ContentsLimitInsurance.App
 
             app.UseHttpsRedirection();
             app.UseSpaStaticFiles(new StaticFileOptions { RequestPath = "/ClientApp/build" });
-            //app.UseStaticFiles();
-            //app.UseSpaStaticFiles();
 
             app.UseRouting();
 

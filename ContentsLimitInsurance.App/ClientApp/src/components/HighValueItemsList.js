@@ -2,16 +2,12 @@ import { connect } from "react-redux";
 import React, { useEffect } from "react";
 import NewHighValueItemForm from "./NewHighValueItemForm";
 import Category from "./Category";
-import {
-  loadHighValueItemsPerCategory,
-  removeHighValueItemRequest,
-} from "../store/thunks";
+import { loadHighValueItemsPerCategory } from "../store/thunks";
 import { Card, Row, Col } from "react-bootstrap";
 import "./HighValueItemsList.css";
 
 const HighValueItemsList = ({
   categories = [],
-  onRemovePressed,
   isLoading,
   startLoadingCategories,
 }) => {
@@ -71,8 +67,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   startLoadingCategories: () => dispatch(loadHighValueItemsPerCategory()),
-  onRemovePressed: (highValueItemId) =>
-    dispatch(removeHighValueItemRequest(highValueItemId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HighValueItemsList);

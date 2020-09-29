@@ -1,6 +1,5 @@
 import {
   loadHighValueItemInProgress,
-  loadHighValueItemSuccess,
   loadHighValueItemFailure,
   createHighValueItem,
   removeHighValueItem,
@@ -9,19 +8,6 @@ import {
 
 const apiURL =
   "https://contentslimitinsuranceapp20200928203149.azurewebsites.net/";
-
-export const loadHighValueItems = () => async (dispatch, getState) => {
-  try {
-    dispatch(loadHighValueItemInProgress());
-    const response = await fetch(apiURL + "api/high-value-items/user/1");
-    const items = await response.json();
-
-    dispatch(loadHighValueItemSuccess(items));
-  } catch (e) {
-    dispatch(loadHighValueItemFailure());
-    dispatch(displayAlert(e));
-  }
-};
 
 export const loadHighValueItemsPerCategory = () => async (
   dispatch,
