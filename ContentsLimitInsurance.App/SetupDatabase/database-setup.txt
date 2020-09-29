@@ -1,0 +1,32 @@
+﻿
+CREATE TABLE item_category
+(
+    item_category_id INT PRIMARY KEY IDENTITY (1, 1),
+    name VARCHAR(150) NOT NULL,
+    item_category_key VARCHAR(255),
+)
+
+INSERT INTO item_category (
+    name
+)
+VALUES
+    (
+        'Eletronics'
+    ),
+    (
+        'Clothing'
+    ),
+    (
+        'Kitchen'
+    );
+
+CREATE TABLE high_value_item
+(
+    high_value_item_id INT PRIMARY KEY IDENTITY (1, 1),
+    value double precision NOT NULL,
+    item_category_id INT NOT NULL,
+    name VARCHAR (150) NOT NULL,
+    high_value_item_key VARCHAR(255),
+    user_id integer NOT NULL,
+    FOREIGN KEY (item_category_id) REFERENCES item_category (item_category_id)
+)

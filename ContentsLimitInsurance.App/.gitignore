@@ -230,3 +230,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+/ContentsLimitInsurance.App/appsettings.Development.json
+/ContentsLimitInsurance.App/appsettings.json
