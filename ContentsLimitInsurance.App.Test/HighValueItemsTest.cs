@@ -120,39 +120,39 @@ namespace ContentsLimitInsurance.App.Test
         }
 
         [Test]
-        public async Task ShouldReturnBadRequestForNullPostRequests ()
+        public void ShouldReturnBadRequestForNullPostRequests ()
         {
-            var actionResult = await _controller.PostHighValueItem(null);
+            var actionResult = _controller.PostHighValueItem(null);
 
             var result = actionResult.Result as BadRequestResult;
             Assert.IsAssignableFrom<BadRequestResult>(result);
         }
 
         [Test]
-        public async Task ShouldReturnBadRequestForInvalidModelStatePostRequests()
+        public void ShouldReturnBadRequestForInvalidModelStatePostRequests()
         {
             HighValueItemDto emptyHighValueItem = new HighValueItemDto();
-            var actionResult = await _controller.PostHighValueItem(emptyHighValueItem);
+            var actionResult = _controller.PostHighValueItem(emptyHighValueItem);
 
             var result = actionResult.Result as BadRequestResult;
             Assert.IsAssignableFrom<BadRequestResult>(result);
         }
 
         [Test]
-        public async Task ShouldReturnCreatedForValidPostRequests()
+        public void ShouldReturnCreatedForValidPostRequests()
         {
             _highValueItemServiceMock
                 .Setup(x => x.AddHighValueItem(It.IsAny<HighValueItemDto>()))
                 .Returns<HighValueItemDto>(x => _newHighValueItem);
 
-            var actionResult = await _controller.PostHighValueItem(_newHighValueItem);
+            var actionResult = _controller.PostHighValueItem(_newHighValueItem);
 
             var result = actionResult.Result as CreatedAtActionResult;
             Assert.IsAssignableFrom<CreatedAtActionResult>(result);
         }
 
         [Test]
-        public async Task ShouldSaveHighValueItem()
+        public void ShouldSaveHighValueItem()
         {
             HighValueItemDto savedHighValueItem = null;
             _highValueItemServiceMock
@@ -162,7 +162,7 @@ namespace ContentsLimitInsurance.App.Test
                     savedHighValueItem = highValueItem;
                 });
 
-            await _controller.PostHighValueItem(_newHighValueItem);
+            _controller.PostHighValueItem(_newHighValueItem);
 
             _highValueItemServiceMock
                 .Verify(x => x.AddHighValueItem(It.IsAny<HighValueItemDto>()), Times.Once
@@ -177,7 +177,7 @@ namespace ContentsLimitInsurance.App.Test
         }
 
         [Test]
-        public async Task ShouldReturnNotFoundForInvalidIdDeleteRequests()
+        public void ShouldReturnNotFoundForInvalidIdDeleteRequests()
         {
             int invalidId = 0;
 
@@ -185,14 +185,14 @@ namespace ContentsLimitInsurance.App.Test
                 .Setup(x => x.HighValueItemExists(It.IsAny<int>()))
                 .Returns<int>(x => false);
 
-            var actionResult = await _controller.DeleteHighValueItem(invalidId);
+            var actionResult = _controller.DeleteHighValueItem(invalidId);
 
             var result = actionResult.Result as NotFoundResult;
             Assert.IsAssignableFrom<NotFoundResult>(result);
         }
 
         [Test]
-        public async Task ShouldReturnOkForValidIdDeleteRequests()
+        public void ShouldReturnOkForValidIdDeleteRequests()
         {
             int validId = 1;
             HighValueItemDto removedHighValueItem = new HighValueItemDto()
@@ -212,14 +212,14 @@ namespace ContentsLimitInsurance.App.Test
                 .Setup(x => x.DeleteHighValueItem(It.IsAny<int>()))
                 .Returns<int>(x => removedHighValueItem);
 
-            var actionResult = await _controller.DeleteHighValueItem(validId);
+            var actionResult = _controller.DeleteHighValueItem(validId);
 
             var result = actionResult.Result as OkObjectResult;
             Assert.IsAssignableFrom<OkObjectResult>(result);
         }
 
         [Test]
-        public async Task ShouldRemoveHighValueItem()
+        public void ShouldRemoveHighValueItem()
         {
             int validId = 1;
             HighValueItemDto removedHighValueItem = new HighValueItemDto()
@@ -239,29 +239,29 @@ namespace ContentsLimitInsurance.App.Test
                 .Setup(x => x.DeleteHighValueItem(It.IsAny<int>()))
                 .Returns<int>(x => removedHighValueItem);
 
-            var actionResult = await _controller.DeleteHighValueItem(validId);
+            var actionResult = _controller.DeleteHighValueItem(validId);
 
-            var getActionResult = await _controller.GetHighValueItem(validId);
+            var getActionResult = _controller.GetHighValueItem(validId);
             var resultGet = getActionResult.Result as NotFoundResult;
 
             Assert.IsAssignableFrom<NotFoundResult>(resultGet);
         }
 
         [Test]
-        public async Task ShouldReturnOkForHighValueItemsPerCategoriesByUserRequests()
+        public void ShouldReturnOkForHighValueItemsPerCategoriesByUserRequests()
         {
             int userId = 1;
-            var actionResult = await _controller.GetHighValueItemsPerCategoriesByUser(userId);
+            var actionResult = _controller.GetHighValueItemsPerCategoriesByUser(userId);
 
             var result = actionResult.Result as OkObjectResult;
             Assert.IsAssignableFrom<OkObjectResult>(result);
         }
 
         [Test]
-        public async Task ShouldReturnOkHighValueItemsByUserRequests()
+        public void ShouldReturnOkHighValueItemsByUserRequests()
         {
             int userId = 1;
-            var actionResult = await _controller.GetHighValueItemsByUser(userId);
+            var actionResult = _controller.GetHighValueItemsByUser(userId);
 
             var result = actionResult.Result as OkObjectResult;
             Assert.IsAssignableFrom<OkObjectResult>(result);

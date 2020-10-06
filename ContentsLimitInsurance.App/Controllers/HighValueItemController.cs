@@ -21,7 +21,7 @@ namespace ContentsLimitInsurance.App.Controllers
         [HttpGet("user/{id}", Name = "GetHighValueItemsByUser")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<IEnumerable<HighValueItemDto>>> GetHighValueItemsByUser([FromRoute]int id)
+        public ActionResult<IEnumerable<HighValueItemDto>> GetHighValueItemsByUser([FromRoute]int id)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace ContentsLimitInsurance.App.Controllers
         [HttpGet("categories/user/{id}", Name = "GetHighValueItemsPerCategoriesByUser")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<IEnumerable<CategoryWithItemsDto>>> GetHighValueItemsPerCategoriesByUser([FromRoute] int id)
+        public ActionResult<IEnumerable<CategoryWithItemsDto>> GetHighValueItemsPerCategoriesByUser([FromRoute] int id)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace ContentsLimitInsurance.App.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<HighValueItemDto>> GetHighValueItem([FromRoute] int id)
+        public ActionResult<HighValueItemDto> GetHighValueItem([FromRoute] int id)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace ContentsLimitInsurance.App.Controllers
         [HttpPost(Name = "PostHighValueItem")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult<HighValueItemDto>> PostHighValueItem([FromBody] HighValueItemDto highValueItemDto)
+        public ActionResult<HighValueItemDto> PostHighValueItem([FromBody] HighValueItemDto highValueItemDto)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace ContentsLimitInsurance.App.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult<HighValueItemDto>> DeleteHighValueItem([FromRoute] int id)
+        public ActionResult<HighValueItemDto> DeleteHighValueItem([FromRoute] int id)
         {
             if (!HighValueItemExists(id))
             {
