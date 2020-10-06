@@ -7,8 +7,11 @@ Simple web application that will allow a customer to calculate the total content
 ## Demo 
 https://contentslimitinsuranceapp20200928203149.azurewebsites.net/ 
 
+## Usage
+There is an example of a database initial structure at ContentsLimitInsurance.App.SetupDatabase. It is necessary to include the appsettings.json and appsettings.Development.json files with a connection string. Those files were excluded from the repository to preserve connection strings used for the demo.
+
 ## Roadmap
-Integration with Postgres Database. 
+Integration with Postgres database and Swagger.
 
 ## Project status
 Developing.
